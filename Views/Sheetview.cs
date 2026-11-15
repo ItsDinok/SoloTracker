@@ -82,9 +82,6 @@ internal sealed class RowsWindow : Window
         );
     }
 
-    // TODO: Find a way to cut down on repetitive code here
-    // I can probably use a list and a loop or something idk
-    // Just get MVP out first
     private void EditRow(Row row)
     {
         Dialog dialogue = new()
@@ -108,117 +105,24 @@ internal sealed class RowsWindow : Window
         static CheckState ToState (bool value) => value ? CheckState.Checked : CheckState.UnChecked;
         static bool IsChecked (CheckBox box) => box.Value == CheckState.Checked;
 
+        TextField   encounter       = AddRow("Encounter",   new TextField {Text = row.Encounter, Width = Dim.Fill(1)});
+        TextField   difficulty      = AddRow("Difficulty",  new TextField {Text = row.Difficulty.ToString(), Width = Dim.Fill(1)});
+        CheckBox    completed       = AddRow("Completed",   new CheckBox  {Value = ToState(row.isCompleted), Width = Dim.Fill(1)});
+        TextField   variants        = AddRow("Variants",    new TextField {Text = row.Variants, Width = Dim.Fill(1)});
+        TextField   additional      = AddRow("Additional",  new TextField {Text = row.Additional, Width = Dim.Fill(1)});
 
+        CheckBox    uploaded        = AddRow("Uploaded", new CheckBox{Value = ToState(row.Uploaded)});
+        TextField   upload_notes    = new() {Text = row.Upload_Notes, X = 35, Y = Pos.Top(uploaded), Width = Dim.Fill(1)};
+        dialogue.Add(new Label{Text = "Upload Notes:", X = 19, Y = Pos.Top(uploaded)}, upload_notes);
 
-        Label encounter_label = new(){
-            Text = "Encounter",
-            X = 1, Y = 1, Width = Dim.Fill (1)};
+        CheckBox    warlock     = new () { Text = " Warlock", Value = ToState(row.isDoneOnWarlock), X = 1, Y = y};
+        CheckBox    titan       = new () { Text = " Titan", Value = ToState(row.isDoneOnTitan), X = 33, Y = y};
+        CheckBox    hunter      = new () { Text = " Hunter", Value = ToState(row.isDoneOnHunter), X = 67, Y = y};
+        dialogue.Add(warlock, titan, hunter);
+        y += 2;
 
-        TextField encounter_field = new(){
-            Text = row.Encounter, X = 15, Y = 1,
-            Width = Dim.Fill(1)};
-
-        Label difficulty_label = new(){
-            Text = "Difficulty",
-            X = 1, Y = 3, Width = Dim.Fill(1)};
-
-        TextField difficulty_field = new(){
-            Text = row.Difficulty.ToString(),
-            X = 15, Y = 3, Width = Dim.Fill(1)};
-
-        Label completed_label = new(){
-            Text = "Completed",
-            X = 1, Y = 5, Width = Dim.Fill(1)};
-
-        CheckBox completed_box = new(){
-            Value = row.isCompleted ? CheckState.Checked : CheckState.UnChecked,
-            X = 15, Y = 5};
-
-        Label variants_label = new(){
-            Text = "Variants",
-            X = 1, Y = 7, Width = Dim.Fill(1)};
-
-        TextField variants_field = new(){
-            Text = row.Variants,
-            X = 15, Y = 7, Width = Dim.Fill(1)};
-
-        Label additional_label = new(){
-            Text = "Additional",
-            X = 1, Y = 9, Width = Dim.Fill(1)};
-
-        TextField additional_field = new(){
-            Text = row.Additional,
-            X = 15, Y = 9, Width = Dim.Fill(1)};
-
-        Label uploaded_label = new(){
-            Text = "Uploaded",
-            X = 1, Y = 11, Width = Dim.Fill(1)};
-
-        CheckBox uploaded_box = new(){
-            Value = row.Uploaded ? CheckState.Checked : CheckState.UnChecked,
-            X = 15, Y = 11, Width = Dim.Fill(1)};
-
-        Label upload_note_label = new(){
-            Text = "Upload Notes:",
-            X = 19, Y = 11, Width = Dim.Fill(1)};
-
-        TextField upload_note_field = new(){
-            Text = row.Upload_Notes,
-            X = 35, Y = 11, Width = Dim.Fill(1)};
-
-        Label warlock_label = new(){
-            Text = "Warlock",
-            X = 1, Y = 13, Width = Dim.Fill(1)};
-
-        Label titan_label = new(){
-            Text = "Titan",
-            X = 33, Y = 13, Width = Dim.Fill(1)};
-
-        Label hunter_label = new(){
-            Text = "Hunter",
-            X = 67, Y = 13, Width = Dim.Fill(1)};
-
-        CheckBox warlock_box = new(){
-            Value = row.isDoneOnWarlock ? CheckState.Checked : CheckState.UnChecked,
-            X = 4, Y = 14, Width = Dim.Fill(1)};
-
-        CheckBox titan_box = new(){
-            Value = row.isDoneOnTitan ? CheckState.Checked : CheckState.UnChecked,
-            X = 35, Y = 14, Width = Dim.Fill(1)};
-
-        CheckBox hunter_box = new(){
-            Value = row.isDoneOnHunter ? CheckState.Checked : CheckState.UnChecked,
-            X = 69, Y = 14, Width = Dim.Fill(1)};
-
-        Label raid_label = new(){
-            Text = "Raid",
-            X = 1, Y = 16, Width = Dim.Fill(1)};
-
-        DropDownList<Raid> raid_select = new(){
-            Value = row._Raid,
-            X = 15, Y = 16, Width = Dim.Fill(1)};
-
-        Label archived_label = new(){
-            Text = "Archived:",
-            X = 1, Y = 18, Width = Dim.Fill(1)};
-
-        CheckBox archived_box = new(){
-            Value = row.isArchived ? CheckState.Checked : CheckState.UnChecked,
-            X = 15, Y = 18, Width = Dim.Fill(1)};
-
-        dialogue.Add(
-            encounter_label, encounter_field,
-            difficulty_label, difficulty_field,
-            completed_label, completed_box,
-            variants_label, variants_field,
-            additional_label, additional_field,
-            uploaded_label, uploaded_box,
-            upload_note_label, upload_note_field,
-            warlock_label, titan_label, hunter_label,
-            warlock_box, titan_box, hunter_box,
-            raid_label, raid_select,
-            archived_label, archived_box
-        );
+        DropDownList<Raid> raid = AddRow("Raid", new DropDownList<Raid> { Value = row._Raid, Width = Dim.Fill(1)});
+        CheckBox    archived    = AddRow("Archived", new CheckBox { Value = ToState(row.isArchived)});
 
         dialogue.AddButton(new Button{Text = "_Cancel"});
         dialogue.AddButton(new Button{Text = "_Save"});
@@ -227,27 +131,24 @@ internal sealed class RowsWindow : Window
 
         if (dialogue.Result == 1)
         {
-            // Text
-            row.Encounter = encounter_field.Text;
-            row.Variants = variants_field.Text;
-            row.Additional = additional_field.Text;
-            row.Upload_Notes = upload_note_field.Text;
+            row.Encounter       = encounter.Text;
+            row.isCompleted     = IsChecked(completed);
+            row.Variants        = variants.Text;
+            row.Additional      = additional.Text;
+            row.Uploaded        = IsChecked(uploaded);
+            row.Upload_Notes    = upload_notes.Text;
+            row.isDoneOnWarlock = IsChecked(warlock);
+            row.isDoneOnTitan   = IsChecked(titan);
+            row.isDoneOnHunter  = IsChecked(hunter);
+            row._Raid           = raid.Value ?? row._Raid; // Keep old value if raid empty
+            row.isArchived      = IsChecked(archived);
 
-            // Checkboxes
-            row.isCompleted = completed_box.Value == CheckState.Checked;
-            row.isDoneOnWarlock = warlock_box.Value == CheckState.Checked;
-            row.isDoneOnTitan = titan_box.Value == CheckState.Checked;
-            row.isDoneOnHunter = hunter_box.Value == CheckState.Checked;
-            row.isArchived = archived_box.Value == CheckState.Checked;
-
-            // Enum
-            row._Raid = raid_select.Value ?? Raid.LastWish;
-
-            // Number handler
-            if (float.TryParse(difficulty_field.Text, out float amount))
+            if (float.TryParse(difficulty.Text, out float amount))
             {
                 row.Difficulty = amount;
             }
+
+            // Handle difficlty here (fuck floats)
 
             _table.Update();
         }
