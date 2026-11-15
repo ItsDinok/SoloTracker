@@ -14,17 +14,45 @@
     "is_archived": false
   },
   {
-    "encounter": "yes",
-    "difficulty": 0.04,
+    "encounter": "Atraks-1, Fallen Exo",
+    "difficulty": 4.1,
     "is_completed": true,
     "variants": "",
     "additional": "",
     "uploaded": true,
-    "upload_notes": "",
+    "upload_notes": "Viral Clickbait",
+    "is_done_on_warlock": false,
+    "is_done_on_titan": true,
+    "is_done_on_hunter": false,
+    "_raid": "DeepstoneCrypt",
+    "is_archived": false
+  },
+  {
+    "encounter": "Confluxes",
+    "difficulty": 2.1,
+    "is_completed": true,
+    "variants": "",
+    "additional": "",
+    "uploaded": true,
+    "upload_notes": "Only warlock",
     "is_done_on_warlock": true,
     "is_done_on_titan": true,
     "is_done_on_hunter": true,
+    "_raid": "VaultOfGlass",
+    "is_archived": false
+  },
+  {
+    "encounter": "",
+    "difficulty": 0,
+    "is_completed": false,
+    "variants": "",
+    "additional": "",
+    "uploaded": false,
+    "upload_notes": "",
+    "is_done_on_warlock": false,
+    "is_done_on_titan": false,
+    "is_done_on_hunter": false,
     "_raid": "LastWish",
-    "is_archived": true
+    "is_archived": false
   }
 ]

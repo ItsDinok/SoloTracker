@@ -64,17 +64,17 @@ public class Row
 
     public Row()
     {
-        Encounter = "yes";
-        Difficulty = 0.04f;
-        isCompleted = true;
+        Encounter = "";
+        Difficulty = 0.0f;
+        isCompleted = false;
         Variants = "";
         Additional = "";
-        Uploaded = true;
+        Uploaded = false;
         Upload_Notes = "";
-        isDoneOnWarlock = true;
-        isDoneOnTitan = true;
-        isDoneOnHunter = true;
-        isArchived = true;
+        isDoneOnWarlock = false;
+        isDoneOnTitan = false;
+        isDoneOnHunter = false;
+        isArchived = false;
         _Raid = Raid.LastWish;
     }
 }

@@ -4,6 +4,8 @@ using Terminal.Gui.Views;
 
 namespace SoloTracker;
 
+// TODO: Pretty print enums
+
 // Full screen window thta shows rows as a table
 // Opened from MainWindow with the App!.Run();
 
@@ -56,6 +58,14 @@ internal sealed class RowsWindow : Window
 
         save.Accepted += (_, _) => JsonManager.Write_Json(_rows);
         back.Accepted += (_, _) => App!.RequestStop(this);
+        add.Accepted += (_, _) =>
+        {
+            Row row = new();
+            EditRow(row);
+            _rows.Add(row);
+            JsonManager.Write_Json(rows);
+            ShowRows();
+        };
 
         Add(_table, add, save, back);
     }
@@ -147,8 +157,6 @@ internal sealed class RowsWindow : Window
             {
                 row.Difficulty = amount;
             }
-
-            // Handle difficlty here (fuck floats)
 
             _table.Update();
         }
