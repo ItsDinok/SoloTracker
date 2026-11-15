@@ -5,6 +5,8 @@ using Terminal.Gui.Views;
 namespace SoloTracker;
 
 // TODO: Pretty print enums
+// TODO: Add deletion
+// TODO: Handle incomplete rows
 
 // Full screen window thta shows rows as a table
 // Opened from MainWindow with the App!.Run();

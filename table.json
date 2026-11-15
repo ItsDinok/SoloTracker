@@ -42,8 +42,8 @@
     "is_archived": false
   },
   {
-    "encounter": "",
-    "difficulty": 0,
+    "encounter": "Taniks",
+    "difficulty": 10,
     "is_completed": false,
     "variants": "",
     "additional": "",
@@ -52,7 +52,7 @@
     "is_done_on_warlock": false,
     "is_done_on_titan": false,
     "is_done_on_hunter": false,
-    "_raid": "LastWish",
-    "is_archived": false
+    "_raid": "DeepstoneCrypt",
+    "is_archived": true
   }
 ]

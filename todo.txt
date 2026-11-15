@@ -1,6 +1,2 @@
-Implement raw data view.
-Implement the ability to add rows.
-Implement the ability to edit rows.
-Test all of this.
-
+Make it look better
 Add statistics view. Maybe even add some graphs. This is long-term goals.
