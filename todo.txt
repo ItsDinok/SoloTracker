@@ -1,0 +1,10 @@
+Create a reader for JSON files.
+Create a JSON schema that can accept multiple rows.
+Test all of said JSON architecture.
+
+Implement raw data view.
+Implement the ability to add rows.
+Implement the ability to edit rows.
+Test all of this.
+
+Add statistics view. Maybe even add some graphs. This is long-term goals.
