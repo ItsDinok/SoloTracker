@@ -1,10 +1,24 @@
 using System.Text;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace SoloTracker;
 
+/*
+    I managed to write the json reader wrong. It needs to take a list of rows and then write them all to a json file
+*/
+
 public class JsonManager
 {
+    public static List<Row> Read_Json()
+    {
+        List<Row> table = new();
+
+
+
+        return table;
+    }
+
     public static void Write_Json(
         string encounter,
         float difficulty,
@@ -43,7 +57,7 @@ public class JsonManager
             writer.WriteBoolean("is_hunter", is_hunter);
             writer.WriteBoolean("is_archived", is_archived);
 
-            writer.WriteString("raid", Table.Stringify_Raid(raid));
+            writer.WriteString("raid", Raid_Extensions.Stringify_Raid(raid));
 
             writer.WriteEndObject();
             writer.Flush();
