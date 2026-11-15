@@ -94,6 +94,22 @@ internal sealed class RowsWindow : Window
             Height = 25,
         };
 
+        int y = 1;
+
+        T AddRow<T> (string label, T view) where T : View
+        {
+            view.X = 15;
+            view.Y = y;
+            dialogue.Add(new Label {Text = label, X = 1, Y = y}, view);
+            y += 2;
+            return view;
+        }
+
+        static CheckState ToState (bool value) => value ? CheckState.Checked : CheckState.UnChecked;
+        static bool IsChecked (CheckBox box) => box.Value == CheckState.Checked;
+
+
+
         Label encounter_label = new(){
             Text = "Encounter",
             X = 1, Y = 1, Width = Dim.Fill (1)};
@@ -120,101 +136,7 @@ internal sealed class RowsWindow : Window
 
         Label variants_label = new(){
             Text = "Variants",
-            X = 1, Y = 7, Width = Dim.Fill(1)};       Label encounter_label = new(){
-            Text = "Encounter",
-            X = 1, Y = 1, Width = Dim.Fill (1)};
-
-        TextField encounter_field = new(){
-            Text = row.Encounter, X = 15, Y = 1,
-            Width = Dim.Fill(1)};
-
-        Label difficulty_label = new(){
-            Text = "Difficulty",
-            X = 1, Y = 3, Width = Dim.Fill(1)};
-
-        TextField difficulty_field = new(){
-            Text = row.Difficulty.ToString(),
-            X = 15, Y = 3, Width = Dim.Fill(1)};
-
-        Label completed_label = new(){
-            Text = "Completed",
-            X = 1, Y = 5, Width = Dim.Fill(1)};
-
-        CheckBox completed_box = new(){
-            Value = row.isCompleted ? CheckState.Checked : CheckState.UnChecked,
-            X = 15, Y = 5};
-
-        Label variants_label = new(){
-            Text = "Variants",
             X = 1, Y = 7, Width = Dim.Fill(1)};
-
-        TextField variants_field = new(){
-            Text = row.Variants,
-            X = 15, Y = 7, Width = Dim.Fill(1)};
-
-        Label additional_label = new(){
-            Text = "Additional",
-            X = 1, Y = 9, Width = Dim.Fill(1)};
-
-        TextField additional_field = new(){
-            Text = row.Additional,
-            X = 15, Y = 9, Width = Dim.Fill(1)};
-
-        Label uploaded_label = new(){
-            Text = "Uploaded",
-            X = 1, Y = 11, Width = Dim.Fill(1)};
-
-        CheckBox uploaded_box = new(){
-            Value = row.Uploaded ? CheckState.Checked : CheckState.UnChecked,
-            X = 15, Y = 11, Width = Dim.Fill(1)};
-
-        Label upload_note_label = new(){
-            Text = "Upload Notes:",
-            X = 19, Y = 11, Width = Dim.Fill(1)};
-
-        TextField upload_note_field = new(){
-            Text = row.Upload_Notes,
-            X = 35, Y = 11, Width = Dim.Fill(1)};
-
-        Label warlock_label = new(){
-            Text = "Warlock",
-            X = 1, Y = 13, Width = Dim.Fill(1)};
-
-        Label titan_label = new(){
-            Text = "Titan",
-            X = 33, Y = 13, Width = Dim.Fill(1)};
-
-        Label hunter_label = new(){
-            Text = "Hunter",
-            X = 67, Y = 13, Width = Dim.Fill(1)};
-
-        CheckBox warlock_box = new(){
-            Value = row.isDoneOnWarlock ? CheckState.Checked : CheckState.UnChecked,
-            X = 4, Y = 14, Width = Dim.Fill(1)};
-
-        CheckBox titan_box = new(){
-            Value = row.isDoneOnTitan ? CheckState.Checked : CheckState.UnChecked,
-            X = 35, Y = 14, Width = Dim.Fill(1)};
-
-        CheckBox hunter_box = new(){
-            Value = row.isDoneOnHunter ? CheckState.Checked : CheckState.UnChecked,
-            X = 69, Y = 14, Width = Dim.Fill(1)};
-
-        Label raid_label = new(){
-            Text = "Raid",
-            X = 1, Y = 16, Width = Dim.Fill(1)};
-
-        DropDownList<Raid> raid_select = new(){
-            Value = row._Raid,
-            X = 15, Y = 16, Width = Dim.Fill(1)};
-
-        Label archived_label = new(){
-            Text = "Archived:",
-            X = 1, Y = 18, Width = Dim.Fill(1)};
-
-        CheckBox archived_box = new(){
-            Value = row.isArchived ? CheckState.Checked : CheckState.UnChecked,
-            X = 15, Y = 18, Width = Dim.Fill(1)};
 
         TextField variants_field = new(){
             Text = row.Variants,
