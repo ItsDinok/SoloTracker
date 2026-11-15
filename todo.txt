@@ -1,4 +1,6 @@
 Make it look better
+Add ordering on the sheetview
+Add filtering on the sheetview
 Colossal refactor needed for the Sheetview
 Mark some class completions as impossible
 Add special solos for flawless runs
