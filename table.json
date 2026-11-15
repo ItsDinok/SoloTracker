@@ -9,5 +9,6 @@
   "is_warlock": true,
   "is_titan": true,
   "is_hunter": true,
-  "is_archived": true
+  "is_archived": true,
+  "raid": "last_wish"
 }

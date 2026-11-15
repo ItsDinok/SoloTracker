@@ -13,6 +13,7 @@ public class JsonManager
         bool is_warlock,
         bool is_titan,
         bool is_hunter,
+        Raid raid,
         string? variants = null,
         string? upload_notes = null,
         string? additional = null,
@@ -41,6 +42,8 @@ public class JsonManager
             writer.WriteBoolean("is_titan", is_titan);
             writer.WriteBoolean("is_hunter", is_hunter);
             writer.WriteBoolean("is_archived", is_archived);
+
+            writer.WriteString("raid", Table.Stringify_Raid(raid));
 
             writer.WriteEndObject();
             writer.Flush();

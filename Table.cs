@@ -1,6 +1,6 @@
 namespace SoloTracker;
 
-enum Raid
+public enum Raid
 {
     LastWish,
     GardenOfSalvation,
@@ -26,8 +26,40 @@ public class Table
     private bool _isDoneOnWarlock;
     private bool _isDoneOnTitan;
     private bool _isDoneOnHunter;
+    private Raid _Raid;
 
     private bool _isArchived;
+
+    public static string Stringify_Raid(Raid raid)
+    {
+        switch(raid)
+        {
+            case Raid.LastWish:
+                return "last_wish";
+            case Raid.GardenOfSalvation:
+                return "garden_of_salvation";
+            case Raid.DeepstoneCrypt:
+                return "deepstone_crypt";
+            case Raid.VaultOfGlass:
+                return "vault_of_glass";
+            case Raid.VowOfTheDisciple:
+                return "vow_of_the_disciple";
+            case Raid.KingsFall:
+                return "kings_fall";
+            case Raid.RootOfNightmares:
+                return "root_of_nightmares";
+            case Raid.CrotasEnd:
+                return "crotas_end";
+            case Raid.SalvationsEdge:
+                return "salvations_edge";
+            case Raid.DesertPerpetual:
+                return "desert_perpetual";
+            default:
+                break;
+        }
+        // NOTE: Because this is a UI data entry thing this should never be reached
+        return "-1";
+    }
 
     public Table()
     {
@@ -42,9 +74,10 @@ public class Table
         _isDoneOnTitan = true;
         _isDoneOnHunter = true;
         _isArchived = true;
+        _Raid = Raid.LastWish;
 
         JsonManager.Write_Json(_Encounter, _Difficulty, _isCompleted, _Uploaded,
-            _isDoneOnWarlock, _isDoneOnTitan, _isDoneOnHunter, _Variants,
+            _isDoneOnWarlock, _isDoneOnTitan, _isDoneOnHunter, _Raid, _Variants,
             _Upload_Notes, _Additional, _isArchived);
     }
 }
