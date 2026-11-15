@@ -21,11 +21,9 @@ public static class JsonManager
 
     public static List<Row> Read_Json()
     {
-        List<Row> table = new();
-
-
-
-        return table;
+        if (!File.Exists("table.json")) return new();
+        using var stream = File.OpenRead("table.json");
+        return JsonSerializer.Deserialize<List<Row>>(stream, Options) ?? new();
     }
 
     public static void Write_Json(List<Row> rows)
