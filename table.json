@@ -1,19 +1,5 @@
 [
   {
-    "encounter": "Perhaps",
-    "difficulty": 0.04,
-    "is_completed": false,
-    "variants": "",
-    "additional": "",
-    "uploaded": true,
-    "upload_notes": "",
-    "is_done_on_warlock": true,
-    "is_done_on_titan": true,
-    "is_done_on_hunter": false,
-    "_raid": "LastWish",
-    "is_archived": false
-  },
-  {
     "encounter": "Atraks-1, Fallen Exo",
     "difficulty": 4.1,
     "is_completed": true,

@@ -5,8 +5,6 @@ using Terminal.Gui.Views;
 namespace SoloTracker;
 
 // TODO: Pretty print enums
-// TODO: Add deletion
-// TODO: Handle incomplete rows
 
 // Full screen window thta shows rows as a table
 // Opened from MainWindow with the App!.Run();
@@ -36,7 +34,17 @@ internal sealed class RowsWindow : Window
         {
             var cell = _table.Value!.SelectedCell; // X = column, y = row
             EditRow(_rows [cell.Y]);
+
+            // Check if it has been deleted
+            if (_rows [cell.Y].Encounter == "mark_for_deletion"
+                && rows[cell.Y].Difficulty == -1
+                && rows[cell.Y].Upload_Notes == "mark_for_deletion")
+            {
+                rows.RemoveAt(cell.Y);
+            }
+
             JsonManager.Write_Json(_rows);
+            ShowRows();
         };
 
         Button add = new()
@@ -64,12 +72,24 @@ internal sealed class RowsWindow : Window
         {
             Row row = new();
             EditRow(row);
-            _rows.Add(row);
-            JsonManager.Write_Json(rows);
-            ShowRows();
+
+            if (IsValidRow(row))
+            {
+                _rows.Add(row);
+                JsonManager.Write_Json(rows);
+                ShowRows();
+            }
         };
 
         Add(_table, add, save, back);
+    }
+
+    private bool IsValidRow(Row row)
+    {
+        // This checks for the bare essential information
+        if (row.Encounter == "") return false;
+        if (row.Difficulty < 0f) return false;
+        return true;
     }
 
     private void ShowRows()
@@ -96,6 +116,8 @@ internal sealed class RowsWindow : Window
 
     private void EditRow(Row row)
     {
+        const int DeleteButton = 0, CancelButton = 1, SaveButton = 2;
+
         Dialog dialogue = new()
         {
             Title = "Edit Row",
@@ -136,12 +158,26 @@ internal sealed class RowsWindow : Window
         DropDownList<Raid> raid = AddRow("Raid", new DropDownList<Raid> { Value = row._Raid, Width = Dim.Fill(1)});
         CheckBox    archived    = AddRow("Archived", new CheckBox { Value = ToState(row.isArchived)});
 
+        Button delete_button = new Button{Text = "Delete"};
+
+        // NOTE: This just makes it hard for a user (exclusively me) to accidentally delete a record
+        // This is just because it is the easiest way to do this
+        delete_button.Accepting += (_, e) => {
+            if (MessageBox.Query(App!, "Delete", "Delete Item?", "_No", "_Yes") == 1)
+            {
+                row.Encounter = "mark_for_deletion";
+                row.Difficulty = -1;
+                row.Upload_Notes = "mark_for_deletion";
+            }
+        };
+
+        dialogue.AddButton(delete_button);
         dialogue.AddButton(new Button{Text = "_Cancel"});
         dialogue.AddButton(new Button{Text = "_Save"});
 
         App!.Run(dialogue);
 
-        if (dialogue.Result == 1)
+        if (dialogue.Result == SaveButton)
         {
             row.Encounter       = encounter.Text;
             row.isCompleted     = IsChecked(completed);
