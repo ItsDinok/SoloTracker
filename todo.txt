@@ -1,2 +1,13 @@
 Make it look better
-Add statistics view. Maybe even add some graphs. This is long-term goals.
+Colossal refactor needed for the Sheetview
+Mark some class completions as impossible
+Add special solos for flawless runs
+Add a master solos section
+Add info page
+
+The statistics page:
+    - Completion % stats
+    - Class completion % stats
+    - Master completion % stats
+    - Raid completion % stats
+    - Possibly make these individual pages
