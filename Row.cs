@@ -12,6 +12,7 @@ public enum Raid
     CrotasEnd,
     SalvationsEdge,
     DesertPerpetual,
+    Pantheon,
 }
 
 public static class Raid_Extensions
@@ -28,6 +29,7 @@ public static class Raid_Extensions
         Raid.CrotasEnd          => "crotas_end",
         Raid.SalvationsEdge     => "salvations_edge",
         Raid.DesertPerpetual    => "desert_perpetual",
+        Raid.Pantheon           => "pantheon",
         _ => "-1"
     };
 
@@ -43,6 +45,7 @@ public static class Raid_Extensions
         "crotas_end"            => Raid.CrotasEnd,
         "salvations_edge"       => Raid.SalvationsEdge,
         "desert_perpetual"      => Raid.DesertPerpetual,
+        "pantheon"              => Raid.Pantheon,
         _ => Raid.LastWish // NOTE: It will never reach this point
     };
 }
