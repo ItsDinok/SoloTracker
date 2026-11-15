@@ -31,10 +31,8 @@ internal sealed class MainWindow : Window
 {
     public MainWindow ()
     {
-        Title = "My App  (Esc to quit)";
+        Title = "Solo Tracker  (Esc to quit)";
 
-        // Layout is DECLARATIVE — position/size with Pos/Dim, don't hardcode coordinates:
-        //   Pos.Center(), Pos.Right(view), Pos.AnchorEnd();  Dim.Fill(), Dim.Auto(), Dim.Percent(50).
         Label welcome = new ()
         {
             Text = "Welcome to Terminal.Gui v2!",
@@ -42,35 +40,48 @@ internal sealed class MainWindow : Window
             Y = 1
         };
 
+
+        // Buttons: View data, statistics, info, quit
+        Button view_data = new()
+        {
+            Text = "_View Spreadsheet",
+            X = Pos.Center (),
+            Y = Pos.Center (),
+        };
+
+        Button statistics = new()
+        {
+            Text = "_Statistics",
+            X = Pos.Center (),
+            Y = Pos.Bottom(view_data) + 1,
+        };
+
+        Button info = new()
+        {
+            Text = "_Info",
+            X = Pos.Center (),
+            Y = Pos.Bottom(statistics) + 1,
+        };
+
         Button quit = new ()
         {
             Text = "_Quit",        // the leading _ defines the hotkey (Alt+Q)
             X = Pos.Center (),
-            Y = Pos.Center ()
+            Y = Pos.Bottom (info) + 1
         };
 
-        Button write_json_test = new()
-        {
-            Text = "_Write Json",
-            X = Pos.Center () + 1,
-            Y = Pos.Bottom (quit) + 1,
-        };
-
-        // v2 has NO `Clicked` event. Use `Accepted` for side effects like this — it fires when
-        // the user activates the view (Enter / click / hotkey). Use `Accepting` only to inspect
-        // or cancel the activation (set e.Handled = true). See AGENTS.md (#Events).
         // `App!` is the running IApplication, reachable from any view in the tree.
         quit.Accepted += (_, _) => App!.RequestStop ();
-        write_json_test.Accepted += (_, _) => {
+        view_data.Accepted += (_, _) => {
             Row x = new();
             Row y = new();
             List<Row> xy = new();
             xy.Add(x); xy.Add(y);
-            JsonManager.Write_Json(xy);
+            RowsWindow rowswindow = new(xy);
+            App!.Run(rowswindow);
+            rowswindow.Dispose();
         };
 
-        Add (welcome, quit, write_json_test);
-
-        // 👉 Add your views here. See AGENTS.md for canonical patterns + common pitfalls.
+        Add (welcome, view_data, statistics, info, quit);
     }
 }
