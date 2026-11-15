@@ -73,11 +73,7 @@ internal sealed class MainWindow : Window
         // `App!` is the running IApplication, reachable from any view in the tree.
         quit.Accepted += (_, _) => App!.RequestStop ();
         view_data.Accepted += (_, _) => {
-            Row x = new();
-            Row y = new();
-            List<Row> xy = new();
-            xy.Add(x); xy.Add(y);
-            RowsWindow rowswindow = new(xy);
+            RowsWindow rowswindow = new(JsonManager.Read_Json());
             App!.Run(rowswindow);
             rowswindow.Dispose();
         };

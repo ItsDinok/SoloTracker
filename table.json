@@ -1,17 +1,17 @@
 [
   {
-    "encounter": "yes",
+    "encounter": "Perhaps",
     "difficulty": 0.04,
-    "is_completed": true,
+    "is_completed": false,
     "variants": "",
     "additional": "",
     "uploaded": true,
     "upload_notes": "",
     "is_done_on_warlock": true,
     "is_done_on_titan": true,
-    "is_done_on_hunter": true,
-    "raid": "LastWish",
-    "is_archived": true
+    "is_done_on_hunter": false,
+    "_raid": "LastWish",
+    "is_archived": false
   },
   {
     "encounter": "yes",
@@ -24,7 +24,7 @@
     "is_done_on_warlock": true,
     "is_done_on_titan": true,
     "is_done_on_hunter": true,
-    "raid": "LastWish",
+    "_raid": "LastWish",
     "is_archived": true
   }
 ]
