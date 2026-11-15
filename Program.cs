@@ -61,7 +61,13 @@ internal sealed class MainWindow : Window
         // or cancel the activation (set e.Handled = true). See AGENTS.md (#Events).
         // `App!` is the running IApplication, reachable from any view in the tree.
         quit.Accepted += (_, _) => App!.RequestStop ();
-        write_json_test.Accepted += (_, _) => new Row();
+        write_json_test.Accepted += (_, _) => {
+            Row x = new();
+            Row y = new();
+            List<Row> xy = new();
+            xy.Add(x); xy.Add(y);
+            JsonManager.Write_Json(xy);
+        };
 
         Add (welcome, quit, write_json_test);
 
